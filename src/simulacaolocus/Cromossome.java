@@ -9,13 +9,6 @@ package simulacaolocus;
  *
  * @author EEEC
  */
-public class SimulacaoLocus {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        GeneticBot bot = new GeneticBot();
-    }
+class Cromossome {
     
 }
