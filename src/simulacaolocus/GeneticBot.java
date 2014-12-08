@@ -5,13 +5,29 @@
  */
 package simulacaolocus;
 
+import simulacaolocus.model.LocusChromossome;
+
 /**
  *
  * @author EEEC
  */
 public class GeneticBot {
     public int getBot(int genetic){
+        //Se nao tiver chomossomos Iniciais gerar
+        //Calcular Fitness
+        //Metodo de seleção
+        //
+        
         return genetic;
     }
     
+    public void calFit(LocusChromossome cromossome){
+        
+    }
+    
+    public void generateChomossomes(){
+        
+    }
+    
+
 }

@@ -16,4 +16,8 @@ public class LocusChromossome {
     public LocusChromossome(int[] genetic){
         this.genetic = genetic;
     }
+    
+    public LocusChromossome crossover(){
+        return this;
+    }
 }

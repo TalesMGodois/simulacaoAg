@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simulacaolocus.model;
+package simulacaolocus.model.selection;
 
 import simulacaolocus.signature.Selection;
 
@@ -11,6 +11,8 @@ import simulacaolocus.signature.Selection;
  *
  * @author EEEC
  */
-public class Elitism extends Selection{
-    
+public class Roleta extends Selection{
+   public Roleta(){
+       
+   }
 }
