@@ -27,8 +27,6 @@ public class GeneticBot {
     
     public GeneticBot(int sizeCloud){
         this.conf = new DefaultConfiguration();
-        this.genes = new Gene[sizeCloud];
-        
         
     }
     
@@ -39,7 +37,7 @@ public class GeneticBot {
         this.default_chromo  = new Chromosome(this.conf,this.genes);
         this.conf.setSampleChromosome(default_chromo);
         
-        this.conf.setPopulationSize(genetic);
+        this.conf.setPopulationSize(this.genes.length);
         
         
         FitnessFunction myFunc = new TranslateMobFitnessFunction(this.default_chromo );

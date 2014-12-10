@@ -5,7 +5,6 @@
  */
 package simulacaolocus.signature;
 
-import simulacaolocus.model.LocusChromossome;
 
 /**
  *
@@ -14,6 +13,6 @@ import simulacaolocus.model.LocusChromossome;
 public abstract class Selection {
     
     public String name;
-    public LocusChromossome chromossome;
+
     
 }

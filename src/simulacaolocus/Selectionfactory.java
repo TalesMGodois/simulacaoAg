@@ -5,8 +5,6 @@
  */
 package simulacaolocus;
 
-import simulacaolocus.model.selection.Aleatory;
-import simulacaolocus.model.LocusChromossome;
 import simulacaolocus.model.selection.Roleta;
 import simulacaolocus.model.selection.Aleatory;
 import simulacaolocus.model.selection.Elitism;
