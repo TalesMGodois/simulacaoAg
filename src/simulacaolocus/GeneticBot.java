@@ -25,20 +25,16 @@ public class GeneticBot {
     public Chromosome default_chromo;
     
     
-    public GeneticBot(int sizeCloud){
+    public GeneticBot(int sizeCloud) throws InvalidConfigurationException{
         this.conf = new DefaultConfiguration();
-        
+        this.conf.setPopulationSize(sizeCloud);
     }
     
     public int getBot(int genetic) throws InvalidConfigurationException{
-        generateGenes();
-        
+        generateGenes();      
         
         this.default_chromo  = new Chromosome(this.conf,this.genes);
         this.conf.setSampleChromosome(default_chromo);
-        
-        this.conf.setPopulationSize(this.genes.length);
-        
         
         FitnessFunction myFunc = new TranslateMobFitnessFunction(this.default_chromo );
 
