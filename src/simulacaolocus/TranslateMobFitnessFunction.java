@@ -43,5 +43,15 @@ public class TranslateMobFitnessFunction  extends FitnessFunction{
         }
         
     }
-    
+
+    public static int getValueAtGene( IChromosome a_potentialSolution,
+                                              int a_position )
+    {
+        Integer value =
+                (Integer) a_potentialSolution.getGene(a_position).getAllele();
+
+        return value.intValue();
+    }
+
+
 }

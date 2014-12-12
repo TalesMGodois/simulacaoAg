@@ -5,6 +5,8 @@
  */
 package simulacaolocus;
 
+import org.jgap.InvalidConfigurationException;
+
 /**
  *
  * @author EEEC
@@ -14,8 +16,9 @@ public class SimulacaoLocus {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        GeneticBot bot = new GeneticBot(500);
+    public static void main(String[] args) throws InvalidConfigurationException {
+        int array[];
+        GeneticBot.getInstance().getBot(2);
     }
     
 }
