@@ -18,7 +18,8 @@ public class SimulacaoLocus {
      */
     public static void main(String[] args) throws InvalidConfigurationException {
         int array[];
-        GeneticBot.getInstance().getBot(2);
+        int[] arry = {1,3,1,3,1,2,0};
+        GeneticBot.getInstance().getBot(arry);
     }
     
 }
