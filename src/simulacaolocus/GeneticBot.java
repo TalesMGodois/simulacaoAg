@@ -25,14 +25,14 @@ public class GeneticBot {
     public FitnessFunction fitnessFunc;
 
 
-    private GeneticBot(int sizeCloud) throws InvalidConfigurationException{
+    private GeneticBot(int sizeCloud) throws InvalidConfigurationException, UnsupportedRepresentationException {
         conf = new DefaultConfiguration();
         conf.setPopulationSize(sizeCloud);
         genes = new Gene[7];
         start();
     }
 
-    public static synchronized GeneticBot getInstance() throws InvalidConfigurationException {
+    public static synchronized GeneticBot getInstance() throws InvalidConfigurationException, UnsupportedRepresentationException {
         if (geneticBot == null){
             geneticBot = new GeneticBot(500);
         }
@@ -40,7 +40,7 @@ public class GeneticBot {
     }
 
 
-    public static void start() throws InvalidConfigurationException {
+    public static void start() throws InvalidConfigurationException, UnsupportedRepresentationException {
         default_chromo  = new Chromosome(conf,genes);
         conf.setSampleChromosome(default_chromo);
 
@@ -48,11 +48,11 @@ public class GeneticBot {
 
         conf.setFitnessFunction(myFunc);
 
-        generateGenes();
+        generateCromossome();
 
     }
 
-
+//    Pegar uma Sequencia****************************
     public int[] getBot(){
         IChromosome bestSolutionSoFar = population.getFittestChromosome();
         int[] gen = getGenetic(bestSolutionSoFar);
@@ -65,8 +65,11 @@ public class GeneticBot {
         genetic = getGenetic(bestSolutionSoFar);
         return genetic;
     }
+//    Pegar uma Sequencia****************************
 
-    public static void generateGenes() throws InvalidConfigurationException{
+//      Gera o Cromossomo com base no tamanho do Array de Genes definido***********************
+
+    public static void generateCromossome() throws InvalidConfigurationException, UnsupportedRepresentationException {
         int size = genes.length - 1;
         for(int i =0;i< size;i++){
             if(i%2 == 0){
@@ -76,10 +79,13 @@ public class GeneticBot {
             }
         }
         genes[size] = new IntegerGene(conf,0,9);
-        
+        genes[size].setValueFromPersistentRepresentation("0");
+
 
     }
+//  Gera o Cromossomo com base no tamanho do Array de Genes definido***********************
 
+//  Pega sequencia com base em um individuo passado
     public int[] getGenetic(IChromosome cromossome){
         Gene[] genes = cromossome.getGenes();
         int size = genes.length;
