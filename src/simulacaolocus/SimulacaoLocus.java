@@ -6,6 +6,7 @@
 package simulacaolocus;
 
 import org.jgap.InvalidConfigurationException;
+import org.jgap.UnsupportedRepresentationException;
 
 /**
  *
@@ -16,10 +17,11 @@ public class SimulacaoLocus {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InvalidConfigurationException {
+    public static void main(String[] args) throws InvalidConfigurationException, UnsupportedRepresentationException {
         int array[];
         int[] arry = {1,3,1,3,1,2,0};
-        GeneticBot.getInstance().getBot(arry);
+        GeneticBot geneticBot = new GeneticBot(500);
+        geneticBot.getBot();
     }
     
 }

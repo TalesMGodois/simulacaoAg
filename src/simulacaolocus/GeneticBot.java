@@ -16,74 +16,77 @@ import org.jgap.impl.IntegerGene;
  */
 public class GeneticBot {
 
-    private static GeneticBot geneticBot;
-    private static Gene[] genes;
-    private static Configuration conf;
-    private static Genotype population;
-    private static Chromosome default_chromo;
+    private GeneticBot geneticBot;
+    private Gene[] genes;
+    private Configuration conf;
+    private Genotype population;
+    private Chromosome default_chromo;
 
-    public static FitnessFunction fitnessFunc;
+    public FitnessFunction fitnessFunc;
 
-//  Construtor
-    private GeneticBot(int sizeCloud) throws InvalidConfigurationException, UnsupportedRepresentationException {
-        conf = new DefaultConfiguration();
-        conf.setPopulationSize(sizeCloud);
-        genes = new Gene[7];
+//  Passar para construtor o tamanho da nuvem de cromossomos e o tamanho do cromossomo
+    public GeneticBot(int sizeCloud) throws InvalidConfigurationException, UnsupportedRepresentationException {
+        this.conf = new DefaultConfiguration();
+        this.conf.setPopulationSize(sizeCloud);
+        this.genes = new Gene[7];
         start();
     }
 
-//  Intancia Do Singleton para ser Utilizada
-    public static synchronized GeneticBot getInstance() throws InvalidConfigurationException, UnsupportedRepresentationException {
-        if (geneticBot == null){
-            geneticBot = new GeneticBot(500);
-        }
-        return geneticBot;
+    public GeneticBot(int sizeCloud,int sizeCromossome) throws InvalidConfigurationException, UnsupportedRepresentationException {
+        this.conf = new DefaultConfiguration();
+        this.conf.setPopulationSize(sizeCloud);
+        this.genes = new Gene[sizeCromossome];
+        start();
     }
 
+
 //  Starta as condicoes para que o codigo funcione
-    public static void start() throws InvalidConfigurationException, UnsupportedRepresentationException {
-        default_chromo  = new Chromosome(conf,genes);
-        conf.setSampleChromosome(default_chromo);
-
-        fitnessFunc = new TranslateMobFitnessFunction(default_chromo);
-
-        conf.setFitnessFunction(fitnessFunc);
-
+    public void start() throws InvalidConfigurationException, UnsupportedRepresentationException {
         generateCromossome();
+        this.default_chromo  = new Chromosome(this.conf,this.genes);
+        this.conf.setSampleChromosome(default_chromo);
+
+        this.fitnessFunc = new TranslateMobFitnessFunction(default_chromo);
+
+        this.conf.setFitnessFunction(fitnessFunc);
+
+
 
     }
 
 //  Pegar uma Sequencia****************************
-    public int[] getBot(){
-        IChromosome bestSolutionSoFar = population.getFittestChromosome();
+    public int[] getBot() throws InvalidConfigurationException {
+        this.population = Genotype.randomInitialGenotype(this.conf);
+        IChromosome bestSolutionSoFar = this.population.getFittestChromosome();
         int[] gen = getGenetic(bestSolutionSoFar);
+        Gene[] test =  bestSolutionSoFar.getGenes();
+        Object allele = test[0].getAllele();
         return gen;
     }
 
 //  Insere um Bot e joga na Nuvem para depois pegar um novo bot
 //  A implementar ainda
-    
-    public int[] getBot(int[] genetic) throws InvalidConfigurationException{
 
+    public int[] getBot(int[] genetic) throws InvalidConfigurationException{
+        System.out.println("entrei aqui");
         IChromosome bestSolutionSoFar = population.getFittestChromosome();
         genetic = getGenetic(bestSolutionSoFar);
         return genetic;
     }
 
 
-//  Gera o Cromossomo com base no tamanho do Array de Genes definido***********************
-    public static void generateCromossome() throws InvalidConfigurationException, UnsupportedRepresentationException {
-        int size = genes.length - 1;
+//  Gera o Cromossomo com base no tamanho do Array de Genes definido
+    public  void generateCromossome() throws InvalidConfigurationException, UnsupportedRepresentationException {
+        int size = this.genes.length - 1;
         for(int i =0;i< size;i++){
             if(i%2 == 0){
-                genes[i] = new IntegerGene(conf,0,1);
+                this.genes[i] = new IntegerGene(this.conf,0,1);
             }else{
-                genes[i] = new IntegerGene(conf,0,9);
+                this.genes[i] = new IntegerGene(this.conf,0,9);
             }
         }
         genes[size] = new IntegerGene(conf,0,9);
-        genes[size].setValueFromPersistentRepresentation("0");
-
+        genes[size].setAllele(0);
 
     }
 
