@@ -6,8 +6,12 @@
 package simulacaolocus;
 
 import org.jgap.*;
+import org.jgap.data.IDataCreators;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerGene;
+
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -50,27 +54,30 @@ public class GeneticBot {
 
         this.conf.setFitnessFunction(fitnessFunc);
 
-
-
     }
 
 //  Pegar uma Sequencia****************************
     public int[] getBot() throws InvalidConfigurationException {
         this.population = Genotype.randomInitialGenotype(this.conf);
         IChromosome bestSolutionSoFar = this.population.getFittestChromosome();
-        int[] gen = getGenetic(bestSolutionSoFar);
-        Gene[] test =  bestSolutionSoFar.getGenes();
-        Object allele = test[0].getAllele();
-        return gen;
+        resetAlelle();
+        bestSolutionSoFar = this.population.getFittestChromosome();
+
+        return getGenetic(bestSolutionSoFar);
+
     }
 
 //  Insere um Bot e joga na Nuvem para depois pegar um novo bot
 //  A implementar ainda
 
     public int[] getBot(int[] genetic) throws InvalidConfigurationException{
-        System.out.println("entrei aqui");
-        IChromosome bestSolutionSoFar = population.getFittestChromosome();
-        genetic = getGenetic(bestSolutionSoFar);
+        Gene[] genes = setGenes(genetic);
+        IChromosome cromossome = this.population.getFittestChromosome();
+
+        cromossome.setGenes(genes);
+        this.population.getPopulation().addChromosome(cromossome);
+
+        genetic = getGenetic(cromossome);
         return genetic;
     }
 
@@ -94,13 +101,34 @@ public class GeneticBot {
     public int[] getGenetic(IChromosome cromossome){
         Gene[] genes = cromossome.getGenes();
         int size = genes.length;
-        int[] genetic = new int[size];
+        int [] genetic = new int[size];
 
-        for(int i = 0; i <size - 1; i++ ){
-            genetic[i] = TranslateMobFitnessFunction.getValueAtGene(
-                cromossome, 3);
+        for(int i = 0; i < size ; i++ ){
+            genetic[i] = (Integer)genes[i].getAllele();
         }
 
         return genetic;
+    }
+
+    protected Gene[] setGenes(int[] array){
+        Gene[] genes = this.genes;
+        for(int i=0;i< array.length;i++){
+            genes[i].setAllele(array[i]);
+        }
+        return genes;
+    }
+
+    protected  void resetAlelle(){
+        Genotype population = this.population;
+        List<IChromosome> cromossomes = population.getPopulation().getChromosomes();
+        Gene[] genes;
+        int size =0;
+        for(int i = 0;i < cromossomes.size(); i++){
+            genes = cromossomes.get(i).getGenes();
+            size = genes.length -1;
+            genes[size].setAllele(0);
+
+        }
+
     }
 }
