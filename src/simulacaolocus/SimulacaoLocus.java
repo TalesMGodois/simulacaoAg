@@ -22,20 +22,12 @@ public class SimulacaoLocus {
         GeneticBot geneticBot = new GeneticBot(500);
         int[] bot = geneticBot.getBot();
         printBot(bot);
-        bot[bot.length -1]++;
-
         for(int j =0; j<50; j++){
+            bot[bot.length -1] = bot[bot.length -1] + victoryOrDerrote();
+            bot = geneticBot.getBot(bot);
             printBot(bot);
-            if(j%2 ==0){
-                bot = geneticBot.getBot(bot);
-                bot[bot.length -1]++;
-            }else{
-                bot = geneticBot.getBot(bot);
-                bot[bot.length -1]--;
-            }
 
         }
-
     }
 
 
@@ -44,5 +36,16 @@ public class SimulacaoLocus {
             System.out.print(bot[i]);
         }
         System.out.print("\n");
+    }
+
+    public static int victoryOrDerrote(){
+        double d = Math.random();
+
+        if (d <= 0.5){
+            return 0;
+        }else{
+            return 1;
+        }
+
     }
 }
