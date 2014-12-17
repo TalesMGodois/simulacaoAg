@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class TranslateMobFitnessFunction  extends FitnessFunction{
     private Chromosome cromossome;
-    private int maxSumOfElements = 8;
-    private int maxWeight = 30;
+    private int maxSumOfElements = 5;
+    private int maxWeight = 50;
     private int[] weights = {3,5,8};
 
 
@@ -41,7 +41,7 @@ public class TranslateMobFitnessFunction  extends FitnessFunction{
         int n3 =(Integer) genes[4].getAllele()*(Integer)genes[5].getAllele()*weights[2];
         int weight = n1+ n2 + n3;
 
-        if((totalofMobs < maxSumOfElements) &&  weight < maxWeight){
+        if((totalofMobs < maxSumOfElements) &&  weight <= maxWeight){
 
             fitness =((Integer)genes[size - 1].getAllele() + 1) * weight;
         }

@@ -76,6 +76,7 @@ public class GeneticBot {
         this.population.getPopulation().addChromosome(cromossome);
         this.population.evolve();
         cromossome = this.population.getFittestChromosome();
+        System.out.println(cromossome.getFitnessValue());
         genetic = getGenetic(cromossome);
         return genetic;
     }

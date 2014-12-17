@@ -21,7 +21,7 @@ public class SimulacaoLocus {
         int array[];
         GeneticBot geneticBot = new GeneticBot(500);
         int[] bot = geneticBot.getBot();
-        printBot(bot);
+//        printBot(bot);
         for(int j =0; j<50; j++){
             bot[bot.length -1] = bot[bot.length -1] + victoryOrDerrote();
             bot = geneticBot.getBot(bot);
