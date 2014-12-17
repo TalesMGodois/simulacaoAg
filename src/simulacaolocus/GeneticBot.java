@@ -76,7 +76,10 @@ public class GeneticBot {
         this.population.getPopulation().addChromosome(cromossome);
         this.population.evolve();
         cromossome = this.population.getFittestChromosome();
-        System.out.println(cromossome.getFitnessValue());
+        System.out.print(cromossome.getFitnessValue());
+        System.out.print(" ");
+        SimulacaoLocus.printBot(genetic);
+        System.out.println("\n");
         genetic = getGenetic(cromossome);
         return genetic;
     }
@@ -131,5 +134,4 @@ public class GeneticBot {
             cromossomes.get(i).setGenes(genes);
         }
     }
-
 }

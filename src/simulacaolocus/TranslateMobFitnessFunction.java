@@ -19,7 +19,7 @@ import java.util.List;
 public class TranslateMobFitnessFunction  extends FitnessFunction{
     private Chromosome cromossome;
     private int maxSumOfElements = 5;
-    private int maxWeight = 50;
+    private int maxWeight = 30;
     private int[] weights = {3,5,8};
 
 

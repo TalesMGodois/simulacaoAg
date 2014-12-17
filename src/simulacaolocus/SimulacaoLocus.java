@@ -25,7 +25,7 @@ public class SimulacaoLocus {
         for(int j =0; j<50; j++){
             bot[bot.length -1] = bot[bot.length -1] + victoryOrDerrote();
             bot = geneticBot.getBot(bot);
-            printBot(bot);
+//            printBot(bot);
 
         }
     }
@@ -42,7 +42,7 @@ public class SimulacaoLocus {
         double d = Math.random();
 
         if (d <= 0.5){
-            return 0;
+            return -1;
         }else{
             return 1;
         }
