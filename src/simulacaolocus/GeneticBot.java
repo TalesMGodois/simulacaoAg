@@ -9,6 +9,7 @@ import org.jgap.*;
 import org.jgap.data.IDataCreators;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerGene;
+import org.jgap.impl.WeightedRouletteSelector;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,6 @@ import java.util.Objects;
  */
 public class GeneticBot {
 
-    private GeneticBot geneticBot;
     private Gene[] genes;
     private Configuration conf;
     private Genotype population;
@@ -59,10 +59,8 @@ public class GeneticBot {
 //  Pegar uma Sequencia****************************
     public int[] getBot() throws InvalidConfigurationException {
         this.population = Genotype.randomInitialGenotype(this.conf);
-        IChromosome bestSolutionSoFar = this.population.getFittestChromosome();
         resetAlelle();
-        bestSolutionSoFar = this.population.getFittestChromosome();
-
+        IChromosome bestSolutionSoFar = this.population.getFittestChromosome();
         return getGenetic(bestSolutionSoFar);
 
     }
@@ -76,7 +74,7 @@ public class GeneticBot {
 
         cromossome.setGenes(genes);
         this.population.getPopulation().addChromosome(cromossome);
-
+        this.population.evolve();
         genetic = getGenetic(cromossome);
         return genetic;
     }
@@ -118,17 +116,18 @@ public class GeneticBot {
         return genes;
     }
 
-    protected  void resetAlelle(){
-        Genotype population = this.population;
-        List<IChromosome> cromossomes = population.getPopulation().getChromosomes();
+    protected  void resetAlelle() throws InvalidConfigurationException {
+        Population population = this.population.getPopulation();
+        List<IChromosome> cromossomes = population.getChromosomes();
         Gene[] genes;
         int size =0;
+        System.out.println(cromossomes.size());
         for(int i = 0;i < cromossomes.size(); i++){
             genes = cromossomes.get(i).getGenes();
             size = genes.length -1;
             genes[size].setAllele(0);
-
+            cromossomes.get(i).setGenes(genes);
         }
-
     }
+
 }

@@ -19,14 +19,30 @@ public class SimulacaoLocus {
      */
     public static void main(String[] args) throws InvalidConfigurationException, UnsupportedRepresentationException {
         int array[];
-        int[] arry = {1,3,1,3,1,2,0};
         GeneticBot geneticBot = new GeneticBot(500);
         int[] bot = geneticBot.getBot();
-
+        printBot(bot);
         bot[bot.length -1]++;
-        arry = geneticBot.getBot(bot);
 
-        System.out.println(bot.toString());
+        for(int j =0; j<50; j++){
+            printBot(bot);
+            if(j%2 ==0){
+                bot = geneticBot.getBot(bot);
+                bot[bot.length -1]++;
+            }else{
+                bot = geneticBot.getBot(bot);
+                bot[bot.length -1]--;
+            }
+
+        }
+
     }
-    
+
+
+    public static void printBot(int[] bot){
+        for(int i =0;i< bot.length; i++){
+            System.out.print(bot[i]);
+        }
+        System.out.print("\n");
+    }
 }
